@@ -1,0 +1,20 @@
+# Build with: docker build --pull -f Dockerfile.secure -t kafka_exporter:secure .
+FROM --platform=$BUILDPLATFORM golang:1.27.2-bookworm@sha256:5cf287a799e6b94384bad13d16b14904c531f51ba65792237e122ce42b392f61 AS build
+ARG TARGETOS=linux
+ARG TARGETARCH=amd64
+ENV CGO_ENABLED=0 GOTOOLCHAIN=local
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+COPY *.go VERSION ./
+RUN go test -mod=readonly -short -timeout=5m ./...
+RUN GOOS=${TARGETOS} GOARCH=${TARGETARCH} go build -mod=readonly -trimpath -tags netgo,osusergo \
+    -ldflags="-s -w -X github.com/prometheus/common/version.Version=$(cat VERSION)" \
+    -o /out/kafka_exporter .
+
+FROM gcr.io/distroless/static-debian13:nonroot@sha256:e2e927ec666bae08560abb3c55d0659eceabb657f56b6782ab500a9fc7f555e3
+COPY --from=build /out/kafka_exporter /bin/kafka_exporter
+COPY LICENSE /licenses/LICENSE
+EXPOSE 9308
+USER 65534:65534
+ENTRYPOINT ["/bin/kafka_exporter"]

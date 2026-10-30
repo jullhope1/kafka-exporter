@@ -1,0 +1,44 @@
+
+
+## Overview
+
+                    │           Analyzed Image            
+────────────────────┼─────────────────────────────────────
+  Target            │  local://kafka_exporter:secure      
+    digest          │  27f2619e96bb                       
+    platform        │ linux/amd64                         
+    vulnerabilities │    0C     0H     0M     0L     1?   
+    size            │ 9.2 MB                              
+    packages        │ 61                                  
+
+
+## Packages and Vulnerabilities
+
+   0C     0H     0M     0L     1?  golang.org/x/crypto 0.57.0
+pkg:golang/golang.org/x/crypto@0.57.0
+
+    x UNSPECIFIED GO-2026-5932
+      https://scout.docker.com/v/GO-2026-5932?s=golang&n=crypto&ns=golang.org%2Fx&t=golang&vr=%3E%3D0
+    
+      The golang.org/x/crypto/openpgp package is unsafe by design, has  
+      numerous known security issues, is not maintained, and should not 
+      be used.                                                          
+                                                                        
+      If you are required to interoperate with OpenPGP systems and need 
+      a maintained package, consider github.com/ProtonMail/go-          
+      crypto/openpgp which is a maintained fork that aims to be a drop-in
+      replacement for this package.                                     
+    
+    
+      Affected range : >=0        
+      Fixed version  : not fixed  
+    
+
+
+1 vulnerability found in 1 package
+  CRITICAL     0  
+  HIGH         0  
+  MEDIUM       0  
+  LOW          0  
+  UNSPECIFIED  1  
+

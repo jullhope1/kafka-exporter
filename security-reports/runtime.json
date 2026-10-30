@@ -1,0 +1,19 @@
+﻿{
+    "image":  "kafka_exporter:secure",
+    "imageId":  "sha256:27f2619e96bb8ec20b21ccba22daa14f4df4d01738baec79e353c2e565cd0380",
+    "testedAt":  "2026-10-19T21:53:21.3295203+00:00",
+    "kafkaImage":  "apache/kafka:4.1.0",
+    "kafkaProtocol":  "3.9.0",
+    "securityProtocol":  "PLAINTEXT",
+    "healthz":  200,
+    "healthzBody":  "ok",
+    "root":  200,
+    "metrics":  200,
+    "assertions":  [
+                       "kafka_brokers = 1",
+                       "exporter-smoke partitions = 2",
+                       "produced and consumed 3 messages",
+                       "exporter-smoke-group lag sum = 0"
+                   ],
+    "runtime":  "UID/GID 65534, read-only root filesystem, all capabilities dropped, no-new-privileges"
+}

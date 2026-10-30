@@ -1,0 +1,474 @@
+
+
+## Overview
+
+                    │              Analyzed Image                
+────────────────────┼────────────────────────────────────────────
+  Target            │  local://danielqsj/kafka-exporter:latest   
+    digest          │  db9ddcbd6c79                              
+    platform        │ linux/amd64                                
+    vulnerabilities │    5C    22H     0M     0L                 
+    size            │ 16 MB                                      
+    packages        │ 56                                         
+
+
+## Packages and Vulnerabilities
+
+   2C     9H     0M     0L  stdlib go1.27.1
+pkg:golang/stdlib@go1.27.1
+
+    x CRITICAL CVE-2026-56857
+      https://scout.docker.com/v/CVE-2026-56857?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      On Windows, when the target of Root.Mkdir or Root.MkdirAll is a   
+      junction pointing to an empty location, the operation can create a
+      directory at the junction target even when that target is located 
+      outside the root. This only applies to operations where the last  
+      path component is a junction (path/to/junction, but not           
+      path/junction/target).                                            
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x CRITICAL CVE-2026-78663
+      https://scout.docker.com/v/CVE-2026-78663?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      The HTTP/2 server can refund connection-level flow control twice  
+      for the same data: Once when a client resets a stream (refunding  
+      data for any sent-but-unread portion of the stream), and again when
+      a request handler reads the buffered data. A malicious client can 
+      exploit this to bypass the configured connection-level flow control
+      limit (MaxReceiveBufferPerConnection). Total buffered data is     
+      still limited by the concurrent stream limit and stream-level flow
+      control.                                                          
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-97032
+      https://scout.docker.com/v/CVE-2026-97032?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      HTTP/2 servers could end up crashing due to inadvertently         
+      modifying its HPACK encoder concurrently. This happens because the
+      server modifies the HPACK encoder from two goroutines without     
+      synchronization: one uses the encoder to encode a HEADERS frame as
+      part of a response sent to a client and the other modifies the    
+      encoder's table size when handling a SETTINGS frame containing    
+      SETTINGS_HEADER_TABLE_SIZE that a client sends. A malicious client
+      can repeatedly send a request while changing the header table size
+      to crash the server.                                              
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-97031
+      https://scout.docker.com/v/CVE-2026-97031?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      Multiple ECH outer extension references are not permitted under   
+      RFC 9849; previously, a client could send a well-crafted packet   
+      that could trigger memory exhaustion in the server process by     
+      specifying multiple references.                                   
+                                                                        
+      We now reject these as malformed and curb the memory amplification
+      vector as a result.                                               
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-94440
+      https://scout.docker.com/v/CVE-2026-94440?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      Parsing a multipart form can bypass memory limits and read an     
+      arbitrarily long line into memory when the remaining limit at the 
+      start of a part is less than 400 bytes.                           
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-94439
+      https://scout.docker.com/v/CVE-2026-94439?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When an HTTP server handler sends a 2xx response to an HTTP/1     
+      CONNECT request and returns without hijacking the connection, the 
+      server improperly continues to read and serve requests from the   
+      connection. Since a 2xx response to an HTTP/1 CONNECT converts the
+      connection into a tunnel, the server should not treat the         
+      connection as continuing to contain HTTP.                         
+                                                                        
+      The impact of this misbehavior is mostly limited to potential     
+      request smuggling, where an intermediate proxy considers the data 
+      on the connection to be tunneled and the server considers it to be
+      HTTP.                                                             
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78669
+      https://scout.docker.com/v/CVE-2026-78669?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      A malicious HTTP/2 peer can cause excessive CPU consumption in the
+      client or server by opening a large number of streams and then    
+      sending many small SETTINGS frames containing                     
+      SETTINGS_INITIAL_WINDOW_SIZE values.                              
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78667
+      https://scout.docker.com/v/CVE-2026-78667?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When parsing a Range header containing a large number of small    
+      ranges, FileServer(FS), ServeContent, and ServeFile(FS) can       
+      consume an excessive amount of CPU.                               
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78660
+      https://scout.docker.com/v/CVE-2026-78660?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      Historically, we have been rather lax about malformed framing-    
+      related headers in our HTTP/2 implementation, as they cannot      
+      interfere with HTTP/2 framing. However, this makes it possible for
+      our HTTP/2 implementation to forward responses containing such    
+      headers to an HTTP/1 client when acting as a reverse proxy. If the
+      HTTP/1 client also does not behave strictly enough, this can      
+      result in response smuggling.                                     
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78659
+      https://scout.docker.com/v/CVE-2026-78659?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When "Trailer" headers are sent by a client, the HTTP server      
+      internally uses the header values to populate the Request.Trailer 
+      map passed to the server handler. Because Request.Trailer is a    
+      map, each entry incurs memory overhead. For HTTP/2 servers, a     
+      malicious client can exploit this by sending a "Trailer" header   
+      that declares a large number of fields, causing the server to     
+      allocate a disproportionate amount of memory while bypassing      
+      Server.MaxHeaderValueCount and Server.MaxHeaderBytes limits. This 
+      exploit is not applicable for HTTP/1 servers, which do not support
+      multiplexing a large number of requests over one TCP connection,  
+      and whose Server.MaxHeaderBytes are calculated differently.       
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-56866
+      https://scout.docker.com/v/CVE-2026-56866?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When http.Transport sends an HTTP/1 CONNECT request with a non-   
+      empty Request.Body, it writes the body directly to the connection 
+      without framing after the request headers. If the server rejects  
+      the CONNECT request with a non-2xx keep-alive response, Transport 
+      returns the connection to the idle pool. Because CONNECT requests 
+      do not have a request body, the server may interpret the trailing 
+      body bytes as a subsequent pipelined HTTP/1.1 request on the      
+      connection, leaving the pooled connection desynchronized and      
+      causing the next caller that reuses it to read the response to the
+      injected request. In reverse proxies (including                   
+      httputil.ReverseProxy) that forward CONNECT requests through a    
+      shared Transport, this can lead to cross-user response poisoning. 
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+
+   2C     9H     0M     0L  stdlib 1.27.1
+pkg:golang/stdlib@1.27.1
+
+    x CRITICAL CVE-2026-56857
+      https://scout.docker.com/v/CVE-2026-56857?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      On Windows, when the target of Root.Mkdir or Root.MkdirAll is a   
+      junction pointing to an empty location, the operation can create a
+      directory at the junction target even when that target is located 
+      outside the root. This only applies to operations where the last  
+      path component is a junction (path/to/junction, but not           
+      path/junction/target).                                            
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x CRITICAL CVE-2026-78663
+      https://scout.docker.com/v/CVE-2026-78663?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      The HTTP/2 server can refund connection-level flow control twice  
+      for the same data: Once when a client resets a stream (refunding  
+      data for any sent-but-unread portion of the stream), and again when
+      a request handler reads the buffered data. A malicious client can 
+      exploit this to bypass the configured connection-level flow control
+      limit (MaxReceiveBufferPerConnection). Total buffered data is     
+      still limited by the concurrent stream limit and stream-level flow
+      control.                                                          
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-97032
+      https://scout.docker.com/v/CVE-2026-97032?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      HTTP/2 servers could end up crashing due to inadvertently         
+      modifying its HPACK encoder concurrently. This happens because the
+      server modifies the HPACK encoder from two goroutines without     
+      synchronization: one uses the encoder to encode a HEADERS frame as
+      part of a response sent to a client and the other modifies the    
+      encoder's table size when handling a SETTINGS frame containing    
+      SETTINGS_HEADER_TABLE_SIZE that a client sends. A malicious client
+      can repeatedly send a request while changing the header table size
+      to crash the server.                                              
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-97031
+      https://scout.docker.com/v/CVE-2026-97031?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      Multiple ECH outer extension references are not permitted under   
+      RFC 9849; previously, a client could send a well-crafted packet   
+      that could trigger memory exhaustion in the server process by     
+      specifying multiple references.                                   
+                                                                        
+      We now reject these as malformed and curb the memory amplification
+      vector as a result.                                               
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-94440
+      https://scout.docker.com/v/CVE-2026-94440?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      Parsing a multipart form can bypass memory limits and read an     
+      arbitrarily long line into memory when the remaining limit at the 
+      start of a part is less than 400 bytes.                           
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-94439
+      https://scout.docker.com/v/CVE-2026-94439?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When an HTTP server handler sends a 2xx response to an HTTP/1     
+      CONNECT request and returns without hijacking the connection, the 
+      server improperly continues to read and serve requests from the   
+      connection. Since a 2xx response to an HTTP/1 CONNECT converts the
+      connection into a tunnel, the server should not treat the         
+      connection as continuing to contain HTTP.                         
+                                                                        
+      The impact of this misbehavior is mostly limited to potential     
+      request smuggling, where an intermediate proxy considers the data 
+      on the connection to be tunneled and the server considers it to be
+      HTTP.                                                             
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78669
+      https://scout.docker.com/v/CVE-2026-78669?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      A malicious HTTP/2 peer can cause excessive CPU consumption in the
+      client or server by opening a large number of streams and then    
+      sending many small SETTINGS frames containing                     
+      SETTINGS_INITIAL_WINDOW_SIZE values.                              
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78667
+      https://scout.docker.com/v/CVE-2026-78667?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When parsing a Range header containing a large number of small    
+      ranges, FileServer(FS), ServeContent, and ServeFile(FS) can       
+      consume an excessive amount of CPU.                               
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78660
+      https://scout.docker.com/v/CVE-2026-78660?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      Historically, we have been rather lax about malformed framing-    
+      related headers in our HTTP/2 implementation, as they cannot      
+      interfere with HTTP/2 framing. However, this makes it possible for
+      our HTTP/2 implementation to forward responses containing such    
+      headers to an HTTP/1 client when acting as a reverse proxy. If the
+      HTTP/1 client also does not behave strictly enough, this can      
+      result in response smuggling.                                     
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-78659
+      https://scout.docker.com/v/CVE-2026-78659?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When "Trailer" headers are sent by a client, the HTTP server      
+      internally uses the header values to populate the Request.Trailer 
+      map passed to the server handler. Because Request.Trailer is a    
+      map, each entry incurs memory overhead. For HTTP/2 servers, a     
+      malicious client can exploit this by sending a "Trailer" header   
+      that declares a large number of fields, causing the server to     
+      allocate a disproportionate amount of memory while bypassing      
+      Server.MaxHeaderValueCount and Server.MaxHeaderBytes limits. This 
+      exploit is not applicable for HTTP/1 servers, which do not support
+      multiplexing a large number of requests over one TCP connection,  
+      and whose Server.MaxHeaderBytes are calculated differently.       
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+    x HIGH CVE-2026-56866
+      https://scout.docker.com/v/CVE-2026-56866?s=golang&n=stdlib&t=golang&vr=%3E%3D1.27.0-0%2C%3C1.27.2
+    
+      When http.Transport sends an HTTP/1 CONNECT request with a non-   
+      empty Request.Body, it writes the body directly to the connection 
+      without framing after the request headers. If the server rejects  
+      the CONNECT request with a non-2xx keep-alive response, Transport 
+      returns the connection to the idle pool. Because CONNECT requests 
+      do not have a request body, the server may interpret the trailing 
+      body bytes as a subsequent pipelined HTTP/1.1 request on the      
+      connection, leaving the pooled connection desynchronized and      
+      causing the next caller that reuses it to read the response to the
+      injected request. In reverse proxies (including                   
+      httputil.ReverseProxy) that forward CONNECT requests through a    
+      shared Transport, this can lead to cross-user response poisoning. 
+    
+    
+      Affected range : >=1.27.0-0  
+                     : <1.27.2     
+      Fixed version  : 1.27.2      
+    
+
+   1C     4H     0M     0L  golang.org/x/net 0.59.0
+pkg:golang/golang.org/x/net@0.59.0
+
+    x CRITICAL CVE-2026-78663
+      https://scout.docker.com/v/CVE-2026-78663?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.60.0
+    
+      The HTTP/2 server can refund connection-level flow control twice  
+      for the same data: Once when a client resets a stream (refunding  
+      data for any sent-but-unread portion of the stream), and again when
+      a request handler reads the buffered data. A malicious client can 
+      exploit this to bypass the configured connection-level flow control
+      limit (MaxReceiveBufferPerConnection). Total buffered data is     
+      still limited by the concurrent stream limit and stream-level flow
+      control.                                                          
+    
+    
+      Affected range : <0.60.0  
+      Fixed version  : 0.60.0   
+    
+    x HIGH CVE-2026-97032
+      https://scout.docker.com/v/CVE-2026-97032?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.60.0
+    
+      HTTP/2 servers could end up crashing due to inadvertently         
+      modifying its HPACK encoder concurrently. This happens because the
+      server modifies the HPACK encoder from two goroutines without     
+      synchronization: one uses the encoder to encode a HEADERS frame as
+      part of a response sent to a client and the other modifies the    
+      encoder's table size when handling a SETTINGS frame containing    
+      SETTINGS_HEADER_TABLE_SIZE that a client sends. A malicious client
+      can repeatedly send a request while changing the header table size
+      to crash the server.                                              
+    
+    
+      Affected range : <0.60.0  
+      Fixed version  : 0.60.0   
+    
+    x HIGH CVE-2026-78669
+      https://scout.docker.com/v/CVE-2026-78669?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.60.0
+    
+      A malicious HTTP/2 peer can cause excessive CPU consumption in the
+      client or server by opening a large number of streams and then    
+      sending many small SETTINGS frames containing                     
+      SETTINGS_INITIAL_WINDOW_SIZE values.                              
+    
+    
+      Affected range : <0.60.0  
+      Fixed version  : 0.60.0   
+    
+    x HIGH CVE-2026-78660
+      https://scout.docker.com/v/CVE-2026-78660?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.60.0
+    
+      Historically, we have been rather lax about malformed framing-    
+      related headers in our HTTP/2 implementation, as they cannot      
+      interfere with HTTP/2 framing. However, this makes it possible for
+      our HTTP/2 implementation to forward responses containing such    
+      headers to an HTTP/1 client when acting as a reverse proxy. If the
+      HTTP/1 client also does not behave strictly enough, this can      
+      result in response smuggling.                                     
+    
+    
+      Affected range : <0.60.0  
+      Fixed version  : 0.60.0   
+    
+    x HIGH CVE-2026-78659
+      https://scout.docker.com/v/CVE-2026-78659?s=golang&n=net&ns=golang.org%2Fx&t=golang&vr=%3C0.60.0
+    
+      When "Trailer" headers are sent by a client, the HTTP server      
+      internally uses the header values to populate the Request.Trailer 
+      map passed to the server handler. Because Request.Trailer is a    
+      map, each entry incurs memory overhead. For HTTP/2 servers, a     
+      malicious client can exploit this by sending a "Trailer" header   
+      that declares a large number of fields, causing the server to     
+      allocate a disproportionate amount of memory while bypassing      
+      Server.MaxHeaderValueCount and Server.MaxHeaderBytes limits. This 
+      exploit is not applicable for HTTP/1 servers, which do not support
+      multiplexing a large number of requests over one TCP connection,  
+      and whose Server.MaxHeaderBytes are calculated differently.       
+    
+    
+      Affected range : <0.60.0  
+      Fixed version  : 0.60.0   
+    
+
+
+27 vulnerabilities found in 3 packages
+  CRITICAL  5   
+  HIGH      22  
+  MEDIUM    0   
+  LOW       0   
+

@@ -2,3 +2,10 @@ vendor
 Dockerfile
 Makefile
 README.md
+
+.git
+.security-cache
+security-reports
+*.tar
+*.tar.sha256
+.local

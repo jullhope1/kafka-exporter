@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-exporter-config
+  labels:
+    app.kubernetes.io/name: kafka-exporter
+data:
+  # Replace these with addresses reachable from the Pods.
+  KAFKA_BOOTSTRAP_1: kafka-1.example.net:9092
+  KAFKA_BOOTSTRAP_2: kafka-2.example.net:9092
+  KAFKA_BOOTSTRAP_3: kafka-3.example.net:9092
+  # Kafka protocol version; adjust to your broker version.
+  KAFKA_VERSION: '3.9.0'
+  KAFKA_LABELS: cluster=external-kafka
+  TOPIC_FILTER: '.*'
+  GROUP_FILTER: '.*'
+  REFRESH_METADATA: 30s
+  GROUP_METRICS_TIMEOUT: 30s
+  # Boolean CLI flags must be standalone, not --flag=true/false.
+  # TLS: use --tls.enabled; SASL: use --sasl.enabled.
+  TLS_FLAG: --no-tls.enabled
+  SASL_FLAG: --no-sasl.enabled
+  SASL_MECHANISM: plain
+  # Leave empty to use system CAs or when TLS is disabled.
+  # For private CA: /etc/kafka/tls/ca.crt.
+  TLS_CA_FILE: ''
+  # Only needed for mutual TLS.
+  TLS_CERT_FILE: ''
+  TLS_KEY_FILE: ''

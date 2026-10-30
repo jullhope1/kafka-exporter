@@ -30,3 +30,8 @@ test/
 .DS_Store
 
 
+
+.security-cache/
+*.tar
+*.tar.sha256
+.local/

@@ -1,0 +1,76 @@
+﻿[
+    {
+        "Id": "sha256:27f2619e96bb8ec20b21ccba22daa14f4df4d01738baec79e353c2e565cd0380",
+        "RepoTags": [
+            "kafka_exporter:secure"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-19T21:47:28.39198222Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "65534:65534",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "9308/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt"
+            ],
+            "Cmd": null,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/home/nonroot",
+            "Entrypoint": [
+                "/bin/kafka_exporter"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 21609980,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/dabrhy99v8shvqh9ltr8ro7zu/diff:/var/lib/docker/overlay2/da09309bf1e28d37ca08355ea9fe3850e13997d766c5cbcea2ce5a885b56f793/diff:/var/lib/docker/overlay2/c4d357d65f9fe5e6a18b2064add710f0eab6361cb08be698f68122770c08797b/diff:/var/lib/docker/overlay2/774cd53da4e738fa0242ad03617c4ea27fdda8547f349ae6cbfaba9a3357e3da/diff:/var/lib/docker/overlay2/a3aea8695501b0c14f1f28546877b3516396c791cf7981574a789c7ce217a15f/diff:/var/lib/docker/overlay2/97b4288045dbbebebae76b805d687145242e4ac4b2272a5f9972ddc5bfeea159/diff:/var/lib/docker/overlay2/db91d1097bd756ef42c8ad2b87f6818ecc69a32363e9eebbe91cace8dc7de383/diff:/var/lib/docker/overlay2/a047a615e4e054e9d5ebd63a52f45d5a1a68bf902bfd910bf05d479bd892c57c/diff:/var/lib/docker/overlay2/5a55fc4bd9242bb1911a35b0673cc3bdfa47e2f5bbc55252a2850652479196c3/diff:/var/lib/docker/overlay2/64c64e39fae9860e0f8b34a402becfcff6d054b5df20d17caa26460484de1d13/diff:/var/lib/docker/overlay2/102891cf394578a44111d8111aa098feacbff2a411d6577de9bf50e68183e003/diff:/var/lib/docker/overlay2/204aac8a57dd96bd85ae66264c65032ebd7b980c394935650c4c6b1632ed9105/diff:/var/lib/docker/overlay2/414f56189a1fe3eb997213a828a18a5cca998bf7e0364eb45bbf2467d1cb9b0c/diff:/var/lib/docker/overlay2/131f07de7667822d2d201614cdfe2dc33300009193b11e58fe7f93c76e1cd8d5/diff",
+                "MergedDir": "/var/lib/docker/overlay2/tn2gz87bq775qzoxgwhnctr35/merged",
+                "UpperDir": "/var/lib/docker/overlay2/tn2gz87bq775qzoxgwhnctr35/diff",
+                "WorkDir": "/var/lib/docker/overlay2/tn2gz87bq775qzoxgwhnctr35/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:9486261b5a13f63ca6904b36721527ac8f19df53d300560138d69ae9b4c203de",
+                "sha256:621c35e751a51a9a9dc3e80aa0b7fe8be2a93402ea6ccd307d30852cd7776cda",
+                "sha256:763a77745f27b86cf26b97887b6842d83720e63b1c48848c0ba9ee54e351d63a",
+                "sha256:f0d0eff4c2312a7bd6e21797bdfea5eb35f60e76b555ce2b22794424af2cad36",
+                "sha256:275a30dd8ce958b21daa9ad962c6fbc09f98306ee2f486b65c9075dc257b1412",
+                "sha256:4d049f83d9cf21d1f5cc0e11deaf36df02790d0e60c1a3829538fb4b61685368",
+                "sha256:af5aa97ebe6ce1604747ec1e21af7136ded391bcabe4acef882e718a87c86bcc",
+                "sha256:6f1cdceb6a3146f0ccb986521156bef8a422cdbb0863396f7f751f575ba308f4",
+                "sha256:bd3cdfae1d3fdd83a2231d608969b38b82349777c2fff9a7c12d54f8ac5c9b38",
+                "sha256:4cde6b0bb6f50a5f255eef7b2a42162c661cf776b803225dcac9a659e396bb6b",
+                "sha256:ad51d0769d16ba578106a177987dfe3d2e02c1668c852b795b2f6b024068242a",
+                "sha256:187cfc6d1e3e8a40a5e64653bcd3239c140807dcf1c09e48021178705a5a6139",
+                "sha256:f2392a9484bf6b18f06beaf705b994e31dbb2716c99cf7d03c9c495cd107f364",
+                "sha256:d6f67005784f9d5026cf452f695fac51512582062710c2b2b19bd9a59fa1b389",
+                "sha256:9dd411560df21d6df6e358d162da47a5f671914f6c3227fd78e1f25f4101604d"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-19T21:47:28.435418217Z"
+        }
+    }
+]

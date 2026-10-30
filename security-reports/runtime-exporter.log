@@ -1,0 +1,3 @@
+﻿exporter-1  | I1019 21:52:02.994493       1 kafka_exporter.go:1038] Starting kafka_exporter (version=1.10.0, branch=, revision=unknown)
+exporter-1  | I1019 21:52:03.013473       1 kafka_exporter.go:1196] Listening on HTTP :9308
+exporter-1  | I1019 21:53:10.309554       1 kafka_exporter.go:759] [kafka:9092]

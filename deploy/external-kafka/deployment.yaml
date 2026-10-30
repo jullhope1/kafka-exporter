@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-exporter
+  labels:
+    app.kubernetes.io/name: kafka-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kafka-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kafka-exporter
+    spec:
+      automountServiceAccountToken: false
+      nodeSelector:
+        kubernetes.io/os: linux
+        kubernetes.io/arch: amd64
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: kafka-exporter
+          # Import the tar on each eligible node, or use your registry address.
+          image: kafka_exporter:secure
+          imagePullPolicy: IfNotPresent
+          args:
+            - --kafka.server=$(KAFKA_BOOTSTRAP_1)
+            - --kafka.server=$(KAFKA_BOOTSTRAP_2)
+            - --kafka.server=$(KAFKA_BOOTSTRAP_3)
+            - --kafka.version=$(KAFKA_VERSION)
+            - --kafka.labels=$(KAFKA_LABELS)
+            - --web.listen-address=:9308
+            - --web.telemetry-path=/metrics
+            - --refresh.metadata=$(REFRESH_METADATA)
+            - --group.metrics.timeout=$(GROUP_METRICS_TIMEOUT)
+            - --topic.filter=$(TOPIC_FILTER)
+            - --group.filter=$(GROUP_FILTER)
+            - --topic.workers=10
+            - --group.workers=10
+            - $(TLS_FLAG)
+            - $(SASL_FLAG)
+            - --sasl.mechanism=$(SASL_MECHANISM)
+            - --tls.ca-file=$(TLS_CA_FILE)
+            - --tls.cert-file=$(TLS_CERT_FILE)
+            - --tls.key-file=$(TLS_KEY_FILE)
+          envFrom:
+            - configMapRef:
+                name: kafka-exporter-config
+          env:
+            - name: SASL_USER_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-exporter-auth
+                  key: username
+                  optional: true
+            - name: SASL_USER_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: kafka-exporter-auth
+                  key: password
+                  optional: true
+          ports:
+            - name: metrics
+              containerPort: 9308
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+            periodSeconds: 5
+            timeoutSeconds: 2
+            failureThreshold: 60
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+            periodSeconds: 10
+            timeoutSeconds: 2
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: metrics
+            periodSeconds: 30
+            timeoutSeconds: 2
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: '1'
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: kafka-tls
+              mountPath: /etc/kafka/tls
+              readOnly: true
+      volumes:
+        - name: kafka-tls
+          secret:
+            secretName: kafka-exporter-tls
+            optional: true
+            defaultMode: 0440
